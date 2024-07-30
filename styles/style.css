@@ -38,44 +38,23 @@ ol {
 }
 
 .visually-hidden {
-  position: absolute; 
-  width: 1px; 
-  margin: -1px; 
-  padding: 0; 
-  border: 0;
-  clip: rect(0 0 0 0); 
-  overflow: hidden; 
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 } 
 
 .content {
   display: flex;
-  justify-content: center;
-  padding: 135px 0px 133px 30px;
+  height: 805px;
+  padding: 135px 30px;
   column-gap: 27px;
 }
 
-.title {
-  font-family: "Oswald";
-  font-size: 75px;
-  font-weight: 700;
-  line-height: 70.5px;
-  text-align: left;
-  color: #fff;
-  text-transform: uppercase;
-  padding-bottom: 18px;
-}
-
-.conten__accent {
-  width: 711px;
-  height: 456px;
-}
-.conten__accent {
-  color:#1b1919;
-}
-
 .result {
-  width: 711px;
-  height: 456px;
   padding-top: 77px;
   position: relative;
 }
@@ -101,18 +80,23 @@ ol {
 }
 
 .search-form__fieldset {
-  height: 54px;
+  border: none;
 }
 
 .search-form__fieldset-title {
-  font-family: Fira Sans Condensed;
+  font-family: "Fira Sans Condensed", sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 21.6px;
+  padding-bottom: 5px;
 }
 
-.search-form__fieldset {
-  border: none;
+.search-form__fieldset:has(.search-form__label-text) {
+  width: 225px;
+}
+
+.search-form__fieldset:has(.search-form__checkbox) {
+  width: 212px;
 }
 
 .search-form__fieldset:has(.search-form__label-text) {
@@ -125,15 +109,9 @@ ol {
 
 .search-form__label {
   width: fit-content;
-}
-
-.search-form__label:focus {
-  outline: none;
-}
-
-.search-form__label:has(:focus-visible) {
-  outline: 1px solid #fff;
-  outline-offset: 1px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
 }
 
 .search-form__textfield {
@@ -154,13 +132,9 @@ ol {
   outline: none;
 }
 
-.search-form__textfield:has(:focus-visible) {
+.search-form__textfield:focus-visible {
   outline: 1px solid #fff;
   outline-offset: 2px;
-}
-
-.search-form__textfield:focus {
-  outline: none;
 }
 
 .search-form__textfield:active {
@@ -169,17 +143,9 @@ ol {
 }
 
 ::placeholder { 
- color:#fff; 
- opacity: 70%;
-}
-
-.search-form__checkbox {
-  cursor: pointer;
-}
-
-.search-form__fieldset-title {
-  padding-bottom: 5px;
-}
+  color:#fff; 
+  opacity: 70%;
+ }
 
 .search-form__checkbox-list {
   display: flex;
@@ -191,6 +157,7 @@ ol {
   height: 19px;
   width: 19px;
   border: 1px solid #fff;
+  cursor: pointer;
 }
 
 .search-form__checkbox[type="checkbox"]:checked + .search-form__pseudo-checkbox {
@@ -199,31 +166,51 @@ ol {
   padding: 1px;
 }
 
-.search-form__label {
-  display: flex;
-  gap: 5px;
-  align-items: center;
+
+.search-form__pseudo-checkbox {
+  display: inline-block;
+  height: 19px;
+  width: 19px;
+  border: 1px solid #fff;
+  cursor: pointer;
+}
+
+.search-form__checkbox[type="checkbox"]:checked + .search-form__pseudo-checkbox {
+  background-color: #fff;
+  background-clip: content-box;
+  padding: 1px;
 }
 
 
-.search-form__label-text:hover {
+.search-form__label:hover .search-form__label-text {
   text-decoration: underline;
   color: #fff;
   cursor: pointer;
 }
 
+.search-form__label:has(:focus-visible) {
+  outline: 1px solid #fff;
+  outline-offset: 2px;
+}
 
-.search-form__submit-button {
+.button { 
   width: 194px;
-  height: 34px;
+  min-height: 34px;
   border: 1px solid #fff;
   background-color: transparent;
   color: inherit;
   font-family: inherit;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 700;
   cursor: pointer;
+}
+
+.search-form__submit-button {
   margin-top: 20px;
+}
+
+.search-form__submit-button:active {
+  background-color: #545050;
 }
 
 .search-form__submit-button:hover {
@@ -232,9 +219,23 @@ ol {
 
 .content__details {
   width: 421px;
-  height: 537px;
   display: flex;
   flex-direction: column;
+}
+
+.title {
+  font-family: "Oswald", sans-serif;
+  font-size: 75px;
+  font-weight: 700;
+  line-height: 70.5px;
+  text-align: left;
+  color: #fff;
+  text-transform: uppercase;
+  padding-bottom: 18px;
+}
+
+.content__accent {
+  color: #545050;
 }
 
 .content__list {
@@ -244,16 +245,24 @@ ol {
 }
 
 .content__list::-webkit-scrollbar {
-  background-color: transparent;
+  width: 10px;               
+}
+.content__list::-webkit-scrollbar-track {
+  background: transparent;        
+}
+.content__list::-webkit-scrollbar-thumb {
+  background-color: transparent;    
+  border-radius: 20px;       
+  border: 1px solid #fff;  
 }
 
-
 .content__list-item:not(:last-of-type) {
-  padding-bottom: 26px;
+  padding-bottom: 30px;
 }
 
 .content__card-link {
   text-decoration: none;
+  display: block;
 }
 
 .content__card-link:hover {
@@ -261,8 +270,28 @@ ol {
   color: #fff;
 }
 
+.content__card-link:focus {
+  outline: none;
+}
+
+.content__card-link:focus-visible {
+  outline: 1px solid #fff;
+  outline-offset: 2px;
+}
+
+.content__card-link_current {
+  background-color: #545050;
+}
+
+.content__video-card {
+  width: 394px;
+  height: 107px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .content__video-card-title {
-  font-family: Oswald;
+  font-family: "Oswald", sans-serif;
   font-size: 30px;
   font-weight: 700;
   color: #fff;
@@ -270,7 +299,7 @@ ol {
 }
 
 .content__video-card-description {
-  font-family: Fira Sans Condensed;
+  font-family: "Fira Sans", sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 16.2px;
@@ -278,51 +307,10 @@ ol {
 }
 
 .content__video-card-thumbnail {
-  width: 194px;
-  height: 111px;
-
-}
-
-.content__video-card {
-  display: flex;
-  justify-content: space-between;
-  /* padding: 1px 0px 0px 0px; */
-}
-
-.content__video-card:focus {
-  outline: none;
-}
-
-.content__video-card:focus-visible {
-  outline: 1px solid #fff;
-  outline-offset: 1px;
-}
-
-.content__video-card:active {
-  background-color: #545050;
-}
-
-.content__video-card-description-container {
-  width: 100%;
-  height: 100%;
-}
-
-.content__accent {
-  opacity: 25%;
+  object-fit: cover;
+  object-position: right;
 }
 
 .more-button {
   width: 100%;
-  height: 34px;
-  border: 1px solid #fff;
-  background-color: transparent;
-  color: inherit;
-  font-family: inherit;
-  font-size: 18px;
-  font-weight: 400;
-  cursor: pointer;
-}
-
-.search-form__submit-button:active {
-  background-color: #545050;
 }
